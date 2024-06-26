@@ -1,24 +1,23 @@
 import { useState, useEffect } from "react";
-import { faker } from "@faker-js/faker";
 
-const HomePage = () => {
-  const [catsData, setCatsData] = useState([]);
-  const [errorMsg, setErrorMsg] = useState("")
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        "https://api.thecatapi.com/v1/images/search?limit=10"
-      );
-      if (!response.ok) {
-        throw new Error("...");
-      }
-      const data = await response.json();
-      console.log(data);
-      setCatsData(data);
-    } catch (error) {
-      console.log(error);
-      setErrorMsg(error.message);
-    }
-  };
+const HomePage = ({ cats, errorMsg, addToBasket }) => {
+  return (
+    <>
+      {errorMsg && <p>{errorMsg}</p>}
+      <div className="cats">
+        {cats.map((cat, index) => (
+          <div key={index}>
+            <img src={cat.catImage} alt={cat.name} />
+            <h3>{cat.name}</h3>
+            <p>£{cat.price}</p>
+            <button onClick={() => addToBasket(cat)}>Add to Basket</button>
+            <button onClick={() => openModal(cat)}>More Info</button>
+            
+          </div>
+        ))}
+      </div>
+    </>
+  );
 };
+
+export default HomePage;

@@ -1,13 +1,17 @@
-import { useState } from 'react'
-import './App.css'
+import { Link, Route, Routes } from "react-router-dom";
+import { useState } from "react";
+import "./App.css";
 
-function App() {
-
+const App = () => {
   return (
     <>
-      
+      <Routes>
+        <Route path="/" />
+        <Route path="/" />
+        <Route path="/" />
+      </Routes>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

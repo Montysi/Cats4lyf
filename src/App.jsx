@@ -1,5 +1,5 @@
 import { Link, Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { faker } from "@faker-js/faker";
 import "./App.css";
 

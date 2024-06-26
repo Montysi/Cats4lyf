@@ -8,7 +8,7 @@ export const BasketProvider = ({ children }) => {
   const [showModal, setShowModal] = useState(false);
 
   //function to add item to the basket and show modal
-  const addItemtoBasket = (item) => {
+  const addItemToBasket = (item) => {
     setBasketItems((prevItems) => [...prevItems, item]);
     setShowModal(true);
   };
@@ -24,3 +24,7 @@ export const BasketProvider = ({ children }) => {
     </BasketContext.Provider>
   )
 };
+
+BasketProvider.propTypes = {
+    children: PropTypes.node.isRequired
+}

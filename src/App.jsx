@@ -1,4 +1,4 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import HomePage from "./Components/HomePage";
 import { faker } from "@faker-js/faker";
@@ -17,14 +17,14 @@ const App = () => {
         throw new Error(response.statusText);
       }
       const data = await response.json();
-      const catData = data.mp((cat, index) => {
+      const catData = data.map((cat, index) => {
         return {
           catID: index,
           catImage: cat.url,
-          name: faker.name.findName(),
+          name: faker.person.fullName(),
           breed: faker.animal.cat(),
-          price: faker.finance.amount(150, 600),
-          gender: faker.name.gender(),
+          price: parseFloat(faker.finance.amount(150, 600)),
+          gender: faker.person.gender(),
         };
       });
       console.log(catData);
@@ -40,14 +40,14 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <Router>
       <Routes>
         <Route
           path="/"
           element={<HomePage cats={cats} errorMsg={errorMsg} />}
         />
       </Routes>
-    </>
+    </Router>
   );
 };
 

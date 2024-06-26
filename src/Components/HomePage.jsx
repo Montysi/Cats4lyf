@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { faker } from "@faker-js/faker";
+import styled from 'styled-components';
 
 const HomePage = () => {
   const [catsData, setCatsData] = useState([]);

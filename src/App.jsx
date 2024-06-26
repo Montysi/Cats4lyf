@@ -52,7 +52,7 @@ const App = () => {
           catImage: cat.url,
           name: faker.person.fullName(),
           breed: faker.animal.cat(),
-          price: parseFloat(faker.finance.amount(150, 600)),
+          price: faker.finance.amount({ min: 150, max: 600 }),
           gender: faker.person.gender(),
         };
       });

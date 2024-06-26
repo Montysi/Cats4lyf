@@ -11,6 +11,8 @@ const HomePage = ({ cats, errorMsg, addToBasket }) => {
             <h3>{cat.name}</h3>
             <p>£{cat.price}</p>
             <button onClick={() => addToBasket(cat)}>Add to Basket</button>
+            <button onClick={() => openModal(cat)}>More Info</button>
+            
           </div>
         ))}
       </div>

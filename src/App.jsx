@@ -1,12 +1,42 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import { BrowserRouter as Router, Route, Routes, BrowserRouter, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import HomePage from "./Components/HomePage";
 import { faker } from "@faker-js/faker";
 import "./App.css";
+import Modal from 'react-modal'; //--------
+
+const customStyles = {
+  content: {
+    width: "50%",
+    height: "50%",
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.75)",
+  },
+};
 
 const App = () => {
   const [cats, setCats] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
+  const [modalIsOpen, setIsOpen] = useState(false);  //----
+  const [selectedCat, setSelectedCat] = useState(null); //----
+
+  const openModal = (cat) => { ///------
+      setSelectedCat(cat);
+      setIsOpen(true);
+  };
+
+  const closeModal =  () => { ///------
+    setIsOpen(false);
+    setSelectedCat(null);
+  }
 
   const fetchData = async () => {
     try {
@@ -35,20 +65,30 @@ const App = () => {
     }
   };
 
+  
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={<HomePage cats={cats} errorMsg={errorMsg} />}
-        />
-      </Routes>
-    </Router>
+    <div>
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={<HomePage cats={cats} errorMsg={errorMsg} />}
+          />
+        </Routes>
+      </Router>
+
+      {selectedCat && (        //----------------------------
+        <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles}>
+
+        </Modal>
+      )}
+    </div>
   );
 };
+
 
 export default App;

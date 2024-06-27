@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../image/blackcat.png";
 import styled from "styled-components";
-import { BasketContext } from "../Context/BasketContext"
+import { BasketContext } from "../Context/BasketContext";
 
 const HomePage = ({ cats, errorMsg, addToBasket }) => {
   const navigate = useNavigate();
@@ -11,31 +11,32 @@ const HomePage = ({ cats, errorMsg, addToBasket }) => {
     navigate("cat");
   };
 
-const HomePage = ({ cats, errorMsg,}) => {
-  const { addItemToBasket, openModal} = useContext(BasketContext);
-  
-  return (
-    <>
-      <NavBar>
-        <img src={Logo} />
-        <h1>Cats4Lyf</h1>
-      </NavBar>
-      {errorMsg && <p>{errorMsg}</p>}
-      <CatsInfo>
-        {cats.map((cat, index) => {
-          return (
-            <CatCard key={index} onClick={() => handleNavigate(index)}>
-              <img src={cat.catImage} alt={cat.name} />
-              <h3>{cat.name}</h3>
-              <p>£{cat.price}</p>
-              <button onClick={() => addToBasket(cat)}>Add to Basket</button>
-              <button onClick={() => openModal(cat)}>More Info</button>
-            </CatCard>
-          );
-        })}
-      </CatsInfo>
-    </>
-  );
+  const HomePage = ({ cats, errorMsg }) => {
+    const { addItemToBasket, openModal } = useContext(BasketContext);
+
+    return (
+      <>
+        <NavBar>
+          <img src={Logo} />
+          <h1>Cats4Lyf</h1>
+        </NavBar>
+        {errorMsg && <p>{errorMsg}</p>}
+        <CatsInfo>
+          {cats.map((cat, index) => {
+            return (
+              <CatCard key={index} onClick={() => handleNavigate(index)}>
+                <img src={cat.catImage} alt={cat.name} />
+                <h3>{cat.name}</h3>
+                <p>£{cat.price}</p>
+                <button onClick={() => addToBasket(cat)}>Add to Basket</button>
+                <button onClick={() => openModal(cat)}>More Info</button>
+              </CatCard>
+            );
+          })}
+        </CatsInfo>
+      </>
+    );
+  };
 };
 
 export default HomePage;

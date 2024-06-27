@@ -21,12 +21,10 @@ const customStyles = {
   },
 };
 
-const CatInfoModal = ({cat}) => {
-  const { modalIsOpen, closeModal } = useContext(CatInfoContext);
+const CatInfoModal = () => {
+  const { modalIsOpen, closeModal, selectedCat } = useContext(CatInfoContext);
 
-  // if (!modalIsOpen) {
-  //   return null;
-  // }
+  
   if (!modalIsOpen || !selectedCat) {
     return null;
   }

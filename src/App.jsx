@@ -3,23 +3,12 @@ import { useState, useEffect } from "react";
 import HomePage from "./Components/HomePage";
 import { faker } from "@faker-js/faker";
 import "./App.css";
-import Modal from "react-modal";
+import BasketProvider from "./Context/BasketContext";
+import BasketModal from "./Components/BasketModal";
 
 const App = () => {
   const [cats, setCats] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [selectedCat, setSelectedCat] = useState(null);
-
-  const openModal = (cat) => {
-    setSelectedCat(cat);
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-    setSelectedCat(null);
-  };
 
   const fetchData = async () => {
     try {
@@ -53,7 +42,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <BasketProvider>
       <Router>
         <Routes>
           <Route
@@ -62,15 +51,8 @@ const App = () => {
           />
         </Routes>
       </Router>
-
-      {selectedCat && (
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          style={customStyles}
-        ></Modal>
-      )}
-    </div>
+      <BasketModal />
+      </BasketProvider>
   );
 };
 

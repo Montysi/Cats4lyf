@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../image/blackcat.png";
 import styled from "styled-components";
+import { BasketContext } from "../Context/BasketContext"
 
 const HomePage = ({ cats, errorMsg, addToBasket }) => {
   const navigate = useNavigate();
-
   const handleNavigate = (index) => {
     setCurrentCat(cats[index]);
     navigate("cat");
   };
 
+const HomePage = ({ cats, errorMsg,}) => {
+  const { addItemToBasket, openModal} = useContext(BasketContext);
+  
   return (
     <>
       <NavBar>

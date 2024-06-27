@@ -6,7 +6,7 @@ import "./App.css";
 import BasketProvider from "./Context/BasketContext";
 import BasketModal from "./Components/BasketModal";
 import Modal from "react-modal";
-import { CatInfoProvider } from './Context/CatInfoContext'
+import { CatInfoProvider } from './Context/CatInfoContext';
 
 
 const App = () => {

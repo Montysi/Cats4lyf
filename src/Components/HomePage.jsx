@@ -2,14 +2,8 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../image/blackcat.png";
 import styled from "styled-components";
-<<<<<<< HEAD
 import { BasketContext } from "../Context/BasketContext"
-import { useState, useEffect, useContext } from "react";
 import { CatInfoContext, CatInfoProvider } from "../Context/CatInfoContext";
-=======
-import { BasketContext } from "../Context/BasketContext";
-import { CatInfoContext } from "../Context/CatInfoContext";
->>>>>>> dc0c513893bf3cda0a24609ebf26a16592c3a3d3
 import CatInfoModal from "./CatinfoModal";
 
 const HomePage = ({ cats, errorMsg }) => {

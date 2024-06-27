@@ -2,34 +2,18 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../image/blackcat.png";
 import styled from "styled-components";
-
-import { BasketContext } from "../Context/BasketContext"
-import { useState, useEffect, useContext } from "react";
-import { CatInfoContext, CatInfoProvider } from "../Context/CatInfoContext";
+import { BasketContext } from "../Context/BasketContext";
+import { CatInfoContext } from "../Context/CatInfoContext";
 import CatInfoModal from "./CatinfoModal";
 
 const HomePage = ({ cats, errorMsg }) => {
   const navigate = useNavigate();
-  const { addItemToBasket, openModal } = useContext(BasketContext);
+  const { addItemToBasket } = useContext(BasketContext);
+  const { openModal } = useContext(CatInfoContext);
 
   const handleNavigate = (index) => {
     navigate(`cat/${index}`);
   };
-}
-
-
-const HomePage = ({ cats, errorMsg,}) => {
-  const { addItemToBasket, openModal} = useContext(BasketContext);
-}
-  
-const HomePage = ({ cats, errorMsg, addToBasket, }) => {
-     const { openModal } = useContext(CatInfoContext);
-     
-
-     const handleOpenModal = (cat) => {
-       openModal(cat); 
-      
-     };
 
   return (
     <>
@@ -41,8 +25,12 @@ const HomePage = ({ cats, errorMsg, addToBasket, }) => {
       <CatsInfo>
         {cats.map((cat, index) => {
           return (
-            <CatCard key={index} onClick={() => handleNavigate(index)}>
-              <img src={cat.catImage} alt={cat.name} />
+            <CatCard key={index}>
+              <img
+                src={cat.catImage}
+                alt={cat.name}
+                onClick={() => handleNavigate(index)}
+              />
               <h3>{cat.name}</h3>
               <p>£{cat.price}</p>
               <button onClick={() => addItemToBasket(cat)}>
@@ -53,17 +41,6 @@ const HomePage = ({ cats, errorMsg, addToBasket, }) => {
           );
         })}
       </CatsInfo>
-      <div className="cats">
-        {cats.map((cat, index) => (
-          <div key={index}>
-            <img src={cat.catImage} alt={cat.name} />
-            <h3>{cat.name}</h3>
-            <p>£{cat.price}</p>
-            <button onClick={() => addToBasket(cat)}>Add to Basket</button>
-            <button onClick={handleOpenModal}>More Info</button>
-          </div>
-        ))}
-      </div>
       <CatInfoModal />
     </>
   );
@@ -99,6 +76,7 @@ const CatsInfo = styled.div`
     height: 250px;
     width: 100%;
     object-fit: cover;
+    cursor: pointer;
   }
 `;
 
@@ -131,3 +109,4 @@ const CatCard = styled.div`
   button:hover {
     background-color: #555;
   }
+`;

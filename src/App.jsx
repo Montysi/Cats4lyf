@@ -5,22 +5,8 @@ import { faker } from "@faker-js/faker";
 import "./App.css";
 import BasketProvider from "./Context/BasketContext";
 import BasketModal from "./Components/BasketModal";
-
-const customStyles = {
-  content: {
-    width: "50%",
-    height: "50%",
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-  overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.75)",
-  },
-};
+import Modal from "react-modal";
+import { CatInfoProvider } from "./Context/CatInfoContext";
 
 const App = () => {
   const [cats, setCats] = useState([]);
@@ -60,16 +46,34 @@ const App = () => {
   return (
     <BasketProvider>
       <Router>
-        <Routes>
-          <Route
-            path="/"
-            element={<HomePage cats={cats} errorMsg={errorMsg} />}
-          />
-        </Routes>
+        <CatInfoProvider>
+          <Routes>
+            <Route
+              path="/"
+              element={<HomePage cats={cats} errorMsg={errorMsg} />}
+            />
+          </Routes>
+        </CatInfoProvider>
       </Router>
       <BasketModal />
-      </BasketProvider>
+    </BasketProvider>
   );
 };
 
 export default App;
+
+const customStyles = {
+  content: {
+    width: "50%",
+    height: "50%",
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.75)",
+  },
+};

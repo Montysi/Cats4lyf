@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { BasketContext } from "../Context/BasketContext";
 
 const BasketModal = () => {
-  const { showModal, closeModal, basketItems } = useContext(BasketContext);
+  const { showModal, closeModal, basketItems, removeItemFromBasket } = useContext(BasketContext);
 
   if (!showModal) {
     return null;
@@ -18,9 +18,12 @@ const BasketModal = () => {
           {basketItems.length === 0 ? (
             <li>Your basket is empty</li>
           ) : (
-            basketItems.map((item, index) => <ShoppingList key={index}>{item.name} -
-                £{item.price}
-            </ShoppingList>)
+            basketItems.map((item, index) => (
+              <ShoppingList key={index}>
+                {item.name} - £{item.price}
+                <RemoveButton onClick={()=> removeItemFromBasket(item)}>Remove</RemoveButton>
+              </ShoppingList>
+            ))
           )}
         </ul>
         <CheckoutButton>Proceed to Checkout</CheckoutButton>
@@ -37,14 +40,14 @@ const ModalBackground = styled.div`
   right: 0;
   width: 20%;
   height: 100%;
-  background-color: #6969a4;
+  background-color: #57575a;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const ModalContainer = styled.div`
-  background: #eae3a5;
+  background-color: #a9a9a9;
   padding: 20px;
   border-radius: 8px;
   position: relative;
@@ -68,6 +71,10 @@ const CloseButton = styled.button`
 const ShoppingList = styled.li`
     margin-bottom: 10px;
     font-family: Arial, Helvetica, sans-serif
+`
+
+const RemoveButton = styled.button`
+  
 `
 
 const CheckoutButton = styled.button`

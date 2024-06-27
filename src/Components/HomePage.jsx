@@ -33,7 +33,9 @@ const HomePage = ({ cats, errorMsg }) => {
               />
               <h3>{cat.name}</h3>
               <p>£{cat.price}</p>
-              <button onClick={() => addItemToBasket(cat)}>Add to Basket</button>
+              <button onClick={() => addItemToBasket(cat)}>
+                Add to Basket
+              </button>
               <button onClick={() => openModal(cat)}>More Info</button>
             </CatCard>
           );

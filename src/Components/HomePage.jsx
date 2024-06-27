@@ -2,7 +2,11 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "../image/blackcat.png";
 import styled from "styled-components";
-import { BasketContext } from "../Context/BasketContext";
+
+import { BasketContext } from "../Context/BasketContext"
+import { useState, useEffect, useContext } from "react";
+import { CatInfoContext, CatInfoProvider } from "../Context/CatInfoContext";
+import CatInfoModal from "./CatinfoModal";
 
 const HomePage = ({ cats, errorMsg }) => {
   const navigate = useNavigate();
@@ -11,6 +15,21 @@ const HomePage = ({ cats, errorMsg }) => {
   const handleNavigate = (index) => {
     navigate(`cat/${index}`);
   };
+}
+
+
+const HomePage = ({ cats, errorMsg,}) => {
+  const { addItemToBasket, openModal} = useContext(BasketContext);
+}
+  
+const HomePage = ({ cats, errorMsg, addToBasket, }) => {
+     const { openModal } = useContext(CatInfoContext);
+     
+
+     const handleOpenModal = (cat) => {
+       openModal(cat); 
+      
+     };
 
   return (
     <>
@@ -34,6 +53,18 @@ const HomePage = ({ cats, errorMsg }) => {
           );
         })}
       </CatsInfo>
+      <div className="cats">
+        {cats.map((cat, index) => (
+          <div key={index}>
+            <img src={cat.catImage} alt={cat.name} />
+            <h3>{cat.name}</h3>
+            <p>£{cat.price}</p>
+            <button onClick={() => addToBasket(cat)}>Add to Basket</button>
+            <button onClick={handleOpenModal}>More Info</button>
+          </div>
+        ))}
+      </div>
+      <CatInfoModal />
     </>
   );
 };
@@ -100,4 +131,3 @@ const CatCard = styled.div`
   button:hover {
     background-color: #555;
   }
-`;

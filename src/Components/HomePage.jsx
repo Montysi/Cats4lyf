@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../image/blackcat.png";
 import styled from "styled-components";
 import { BasketContext } from "../Context/BasketContext";
@@ -8,7 +10,7 @@ import CatInfoModal from "./CatinfoModal";
 
 const HomePage = ({ cats, errorMsg }) => {
   const navigate = useNavigate();
-  const { addItemToBasket } = useContext(BasketContext);
+  const { addItemToBasket, toggleModal } = useContext(BasketContext);
   const { openModal } = useContext(CatInfoContext);
 
   const handleNavigate = (index) => {
@@ -18,8 +20,15 @@ const HomePage = ({ cats, errorMsg }) => {
   return (
     <>
       <NavBar>
-        <img src={Logo} alt="Logo" />
-        <h1>Cats4Lyf</h1>
+        <NavBarLeft>
+          <img src={Logo} alt="Logo" />
+          <h1>Cats4Lyf</h1>
+        </NavBarLeft>
+        <NavBarRight>
+          <BasketIcon onClick={toggleModal}>
+            <FontAwesomeIcon icon={faShoppingBasket} size="2x" />
+          </BasketIcon>
+        </NavBarRight>
       </NavBar>
       {errorMsg && <p>{errorMsg}</p>}
       <CatsInfo>
@@ -36,7 +45,7 @@ const HomePage = ({ cats, errorMsg }) => {
               <button onClick={() => addItemToBasket(cat)}>
                 Add to Basket
               </button>
-              <button onClick={() => openModal(cat)}>More Info</button>
+              <button onClick={() => showModal(cat)}>More Info</button>
             </CatCard>
           );
         })}
@@ -55,15 +64,47 @@ const NavBar = styled.nav`
   top: 0;
   left: 0;
   z-index: 10;
-  background-color: #a9a9a9;
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  color: #fff;
+`;
+
+const NavBarLeft = styled.div`
   display: flex;
   align-items: center;
 
   img {
     height: 50px;
     width: 50px;
-    padding-left: 30px;
   }
+
+  h1 {
+    margin-left: 10px;
+  }
+`;
+
+const NavBarRight = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const BasketIcon = styled.div`
+  cursor: pointer;
+  color: white;
+  padding-right: 50px;
+
+  &:hover {
+    color: black;
+  }
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  text-align: center;
+  margin-top: 80px;
 `;
 
 const CatsInfo = styled.div`
@@ -77,6 +118,11 @@ const CatsInfo = styled.div`
     width: 100%;
     object-fit: cover;
     cursor: pointer;
+  }
+
+  h1 {
+    flex-grow: 1;
+    text-align: center;
   }
 `;
 

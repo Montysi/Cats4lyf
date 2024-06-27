@@ -1,6 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CatInfoContext } from "../Context/CatInfoContext";
+import CatInfoModal from "./CatinfoModal";
 
 const HomePage = ({ cats, errorMsg, addToBasket }) => {
+     const { openModal } = useContext(CatInfoContext);
+
+     const handleOpenModal = () => {
+       openModal(); 
+     };
+
   return (
     <>
       {errorMsg && <p>{errorMsg}</p>}
@@ -11,8 +19,7 @@ const HomePage = ({ cats, errorMsg, addToBasket }) => {
             <h3>{cat.name}</h3>
             <p>£{cat.price}</p>
             <button onClick={() => addToBasket(cat)}>Add to Basket</button>
-            <button onClick={() => openModal(cat)}>More Info</button>
-            
+            <button onClick={handleOpenModal}>More Info</button>
           </div>
         ))}
       </div>

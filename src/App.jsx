@@ -4,6 +4,7 @@ import HomePage from "./Components/HomePage";
 import { faker } from "@faker-js/faker";
 import "./App.css";
 import Modal from "react-modal";
+import { CatInfoProvider } from './Context/CatInfoContext'
 
 const customStyles = {
   content: {
@@ -24,18 +25,6 @@ const customStyles = {
 const App = () => {
   const [cats, setCats] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [selectedCat, setSelectedCat] = useState(null);
-
-  const openModal = (cat) => {
-    setSelectedCat(cat);
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-    setSelectedCat(null);
-  };
 
   const fetchData = async () => {
     try {
@@ -70,6 +59,10 @@ const App = () => {
 
   return (
     <div>
+      <CatInfoProvider>
+        <HomePage />
+      </CatInfoProvider>
+      
       <Router>
         <Routes>
           <Route
@@ -78,14 +71,6 @@ const App = () => {
           />
         </Routes>
       </Router>
-
-      {selectedCat && (
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          style={customStyles}
-        ></Modal>
-      )}
     </div>
   );
 };

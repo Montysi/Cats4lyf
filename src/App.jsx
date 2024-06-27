@@ -46,22 +46,18 @@ const App = () => {
 
   return (
     <BasketProvider>
-    <div>
-      
-      
       <Router>
         <CatInfoProvider>
-        <Routes>
-          <Route
-            path="/"
-            element={<HomePage cats={cats} errorMsg={errorMsg} />}
-          />
-        </Routes>
+          <Routes>
+            <Route
+              path="/"
+              element={<HomePage cats={cats} errorMsg={errorMsg} />}
+            />
+          </Routes>
         </CatInfoProvider>
       </Router>
       <BasketModal />
-      </BasketProvider>
-    </div>
+    </BasketProvider>
   );
 };
 

@@ -6,8 +6,8 @@ import { faker } from "@faker-js/faker";
 
 const customStyles = {
   content: {
-    width: "50%",
-    height: "50%",
+    width: "70%",
+    height: "70%",
     top: "50%",
     left: "50%",
     right: "auto",
@@ -42,15 +42,32 @@ const CatInfoModal = () => {
         </button>
       </Header>
       <Content>
-        <h2>{selectedCat.name}</h2>
-        <p>Breed: {selectedCat.breed}</p>
-        <p>Price: ${selectedCat.price}</p>
-        <p>Gender: {selectedCat.gender}</p>
-        <img
-          src={selectedCat.catImage}
-          alt="Cat"
-          style={{ maxWidth: "100px" }}
-        />
+        <ImgContent>
+          <img
+            src={selectedCat.catImage}
+            alt="Cat"
+            style={{ maxWidth: "100px" }}
+          />
+        </ImgContent>
+        <TextContent>
+          <h2>{selectedCat.name}</h2>
+          <p>Breed: {selectedCat.breed}</p>
+          <p>Price: ${selectedCat.price}</p>
+          <p>Gender: {selectedCat.gender}</p>
+          <p>
+            {selectedCat.name} is a delightful {selectedCat.breed} with a
+            charming personality. This {selectedCat.gender.toLowerCase()} is
+            known for{" "}
+            {selectedCat.breed === "Persian"
+              ? "a luxurious coat and calm demeanor"
+              : selectedCat.breed === "Siamese"
+              ? "an affectionate nature and vocal communication"
+              : "a playful and friendly disposition"}
+            . Perfect for families or individuals looking for a loving
+            companion. Don't miss out on the chance to welcome{" "}
+            {selectedCat.name} into your home!
+          </p>
+        </TextContent>
       </Content>
     </Modal>
   );
@@ -87,4 +104,38 @@ const Header = styled.header`
 
 const Content = styled.div`
   padding: 20px;
+  display: flex;
+  height: 75%;
+  flex-direction: row;
+`;
+
+const ImgContent = styled.div`
+flex: 1;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid red;
+  overflow: hidden;
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+`;
+
+const TextContent = styled.div`
+  flex: 1; 
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+
+  h2 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin: 5px 0;
+  }
 `;

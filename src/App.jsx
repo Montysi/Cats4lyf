@@ -29,7 +29,7 @@ const App = () => {
           name: faker.person.fullName(),
           breed: faker.animal.cat(),
           price: faker.finance.amount({ min: 150, max: 600 }),
-          gender: faker.person.gender(),
+          gender: faker.helpers.arrayElement(["Male", "Memale"]),
         };
       });
       console.log(catData);

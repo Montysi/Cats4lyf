@@ -8,7 +8,7 @@ const HomePage = ({ cats, errorMsg,}) => {
   return (
     <>
       <div>
-        <img src={Logo} />
+        {/* <img src={Logo} /> */}
         <h1>Cats4Lyf</h1>
       </div>
       {errorMsg && <p>{errorMsg}</p>}
@@ -19,7 +19,7 @@ const HomePage = ({ cats, errorMsg,}) => {
               <img src={cat.catImage} alt={cat.name} />
               <h3>{cat.name}</h3>
               <p>£{cat.price}</p>
-              <button onClick={() => addToBasket(cat)}>Add to Basket</button>
+              <button onClick={() => addItemToBasket(cat)}>Add to Basket</button>
               <button onClick={() => openModal(cat)}>More Info</button>
             </div>
           );

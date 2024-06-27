@@ -1,12 +1,14 @@
 import { useState, useEffect, useContext } from "react";
-import { CatInfoContext } from "../Context/CatInfoContext";
+import { CatInfoContext, CatInfoProvider } from "../Context/CatInfoContext";
 import CatInfoModal from "./CatinfoModal";
 
-const HomePage = ({ cats, errorMsg, addToBasket }) => {
-     const { openModal } = useContext(CatInfoContext);
 
-     const handleOpenModal = () => {
-       openModal(); 
+const HomePage = ({ cats, errorMsg, addToBasket, }) => {
+     const { openModal } = useContext(CatInfoContext);
+     
+
+     const handleOpenModal = (cat) => {
+       openModal(cat); 
      };
 
   return (
@@ -23,6 +25,7 @@ const HomePage = ({ cats, errorMsg, addToBasket }) => {
           </div>
         ))}
       </div>
+      <CatInfoModal />
     </>
   );
 };

@@ -38,4 +38,5 @@ const CatInfoModal = () => {
   );
 };
 
+
 export default CatInfoModal;

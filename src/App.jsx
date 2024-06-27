@@ -26,6 +26,10 @@ const App = () => {
   const [cats, setCats] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
 
+  <CatInfoProvider>
+    <HomePage />
+  </CatInfoProvider>;
+
   const fetchData = async () => {
     try {
       const response = await fetch(

@@ -9,6 +9,7 @@ const HomePage = ({ cats, errorMsg, addToBasket, }) => {
 
      const handleOpenModal = (cat) => {
        openModal(cat); 
+      
      };
 
   return (

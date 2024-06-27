@@ -18,7 +18,7 @@ const customStyles = {
   },
 };
 
-const CatInfoModal = () => {
+const CatInfoModal = (cat) => {
   const { modalIsOpen, closeModal } = useContext(CatInfoContext);
 
   if (!modalIsOpen) {

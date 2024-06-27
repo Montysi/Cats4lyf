@@ -26,10 +26,6 @@ const App = () => {
   const [cats, setCats] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
 
-  <CatInfoProvider>
-    <HomePage />
-  </CatInfoProvider>;
-
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -63,17 +59,17 @@ const App = () => {
 
   return (
     <div>
-      <CatInfoProvider>
-        <HomePage />
-      </CatInfoProvider>
+      
       
       <Router>
+        <CatInfoProvider>
         <Routes>
           <Route
             path="/"
             element={<HomePage cats={cats} errorMsg={errorMsg} />}
           />
         </Routes>
+        </CatInfoProvider>
       </Router>
     </div>
   );

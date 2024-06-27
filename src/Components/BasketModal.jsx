@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { BasketContext } from "../Context/BasketContext";
 
 const BasketModal = () => {
-  const { showModal, closeModal, basketItems, calculateTotalPrice } =
+  const { showModal, closeModal, basketItems, calculateTotalPrice, removeItemFromBasket } =
     useContext(BasketContext);
 
   if (!showModal) {
@@ -21,6 +21,9 @@ const BasketModal = () => {
           basketItems.map((item, index) => (
             <ShoppingListItem key={index}>
               {item.name} - £{item.price}
+              <RemoveButton onClick={() => removeItemFromBasket(item)}>
+                Remove
+              </RemoveButton>
             </ShoppingListItem>
           ))
         )}
@@ -109,6 +112,9 @@ const TotalLabel = styled.span`
 
 const TotalPrice = styled.span`
   color: #333;
+`;
+
+const RemoveButton = styled.button`
 `;
 
 const CheckoutButton = styled.button`

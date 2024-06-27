@@ -27,6 +27,11 @@ export const BasketProvider = ({ children }) => {
     );
   };
 
+  const removeItemFromBasket = (itemToRemove) => {
+    setBasketItems ((prevItems) => prevItems.filter(item => item !== itemToRemove));
+  }
+
+
   //Gathers all pieces of state and functions into one place
   //allowing us to provide all these values to any component that needs them
   const contextValue = {
@@ -35,8 +40,10 @@ export const BasketProvider = ({ children }) => {
     showModal,
     closeModal,
     calculateTotalPrice,
+    removeItemFromBasket,
   };
 
+  
   return (
     <BasketContext.Provider value={contextValue}>
       {children}

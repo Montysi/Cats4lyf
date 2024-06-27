@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
+import React, { useContext } from "react";
+import { BasketContext } from "../Context/BasketContext"
 
-const HomePage = ({ cats, errorMsg, addToBasket }) => {
+const HomePage = ({ cats, errorMsg,}) => {
+  const { addItemToBasket, openModal} = useContext(BasketContext);
+  
   return (
     <>
       {errorMsg && <p>{errorMsg}</p>}
@@ -10,7 +14,7 @@ const HomePage = ({ cats, errorMsg, addToBasket }) => {
             <img src={cat.catImage} alt={cat.name} />
             <h3>{cat.name}</h3>
             <p>£{cat.price}</p>
-            <button onClick={() => addToBasket(cat)}>Add to Basket</button>
+            <button onClick={() => addItemToBasket(cat)}>Add to Basket</button>
             <button onClick={() => openModal(cat)}>More Info</button>
             
           </div>

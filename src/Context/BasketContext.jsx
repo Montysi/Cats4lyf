@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import PropTypes from "prop-types";
 
 export const BasketContext = createContext();
 
@@ -13,18 +14,26 @@ export const BasketProvider = ({ children }) => {
     setShowModal(true);
   };
 
-  constCloseModal = () => {
+  const closeModal = () => {
     setShowModal(false);
   };
 
-  //Provide context
+  const contextValue = { 
+    basketItems,
+    addItemToBasket,
+    showModal,
+    closeModal,
+  };
+
   return (
-    <BasketContext.Provider value= {{basketItems, addItemtoBasket, showModal, closeModal}}>
+    <BasketContext.Provider value= {contextValue}>
         {children}
     </BasketContext.Provider>
   )
 };
 
 BasketProvider.propTypes = {
-    children: PropTypes.node.isRequired
-}
+    children: PropTypes.node.isRequired,
+};
+
+export default BasketProvider;

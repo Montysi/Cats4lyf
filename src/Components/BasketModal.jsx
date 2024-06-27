@@ -13,16 +13,17 @@ const BasketModal = () => {
     <ModalBackground>
       <ModalContainer>
         <CloseButton onClick={closeModal}>Close</CloseButton>
-        <h2>Shopping Basket</h2>
+        <h2>Basket</h2>
         <ul>
           {basketItems.length === 0 ? (
             <li>Your basket is empty</li>
           ) : (
-            basketItems.map((item, index) => (
-            <li key={index}>{item.name}</li>
-          ))
-        )}
+            basketItems.map((item, index) => <ShoppingList key={index}>{item.name} -
+                £{item.price}
+            </ShoppingList>)
+          )}
         </ul>
+        <CheckoutButton>Proceed to Checkout</CheckoutButton>
       </ModalContainer>
     </ModalBackground>
   );
@@ -30,29 +31,46 @@ const BasketModal = () => {
 
 export default BasketModal;
 
-const ModalContainer = styled.div`
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    position: relative;
-    max-width: 500px;
-    width: 100%;
-    `;
-
 const ModalBackground = styled.div`
   position: fixed;
   top: 0;
-  left: 0;
-  width: 30%;
+  right: 0;
+  width: 20%;
   height: 100%;
-  background-color: #8181ac;
+  background-color: #6969a4;
   display: flex;
   justify-content: center;
-  align-items: center
+  align-items: center;
+`;
+
+const ModalContainer = styled.div`
+  background: #eae3a5;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  max-width: 500px;
+  width: 100%;
 `;
 
 const CloseButton = styled.button`
-    position: absolute;
-    top: 10px;
-    right: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: black;
+  background-color: #a52121;
+
+  &:hover {
+    color: white;
+    background-color: #fd0b0b;
+  }
 `;
+
+const ShoppingList = styled.li`
+    margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif
+`
+
+const CheckoutButton = styled.button`
+    position: absolute;
+    bottom: 10px;
+`

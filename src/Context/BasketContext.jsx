@@ -1,9 +1,11 @@
 import React, { createContext, useState } from "react";
 import PropTypes from "prop-types";
 
+//Context provides a way to pass data through the component tree without having to pass props down manually at every level.
 export const BasketContext = createContext();
 
-//Holds the state and function to update the state
+//'BasketProvider' wraps around parts of the application that need access to the context
+//'children' represents any nested components inside the 'BasketProvider'
 export const BasketProvider = ({ children }) => {
   const [basketItems, setBasketItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +20,9 @@ export const BasketProvider = ({ children }) => {
     setShowModal(false);
   };
 
-  const contextValue = { 
+  //Gathers all pieces of state and functions into one place
+  //allowing us to provide all these values to any component that needs them
+  const contextValue = {
     basketItems,
     addItemToBasket,
     showModal,
@@ -26,14 +30,14 @@ export const BasketProvider = ({ children }) => {
   };
 
   return (
-    <BasketContext.Provider value= {contextValue}>
-        {children}
+    <BasketContext.Provider value={contextValue}>
+      {children}
     </BasketContext.Provider>
-  )
+  );
 };
 
 BasketProvider.propTypes = {
-    children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default BasketProvider;

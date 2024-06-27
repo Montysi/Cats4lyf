@@ -3,74 +3,126 @@ import styled from "styled-components";
 import { BasketContext } from "../Context/BasketContext";
 
 const BasketModal = () => {
-  const { showModal, closeModal, basketItems } = useContext(BasketContext);
+  const { showModal, closeModal, basketItems, calculateTotalPrice } =
+    useContext(BasketContext);
 
   if (!showModal) {
     return null;
   }
 
   return (
-    <ModalBackground>
-      <ModalContainer>
-        <CloseButton onClick={closeModal}>Close</CloseButton>
-        <h2>Basket</h2>
-        <ul>
-          {basketItems.length === 0 ? (
-            <li>Your basket is empty</li>
-          ) : (
-            basketItems.map((item, index) => <ShoppingList key={index}>{item.name} -
-                £{item.price}
-            </ShoppingList>)
-          )}
-        </ul>
-        <CheckoutButton>Proceed to Checkout</CheckoutButton>
-      </ModalContainer>
-    </ModalBackground>
+    <SidePanel showModal={showModal}>
+      <CloseButton onClick={closeModal}>X</CloseButton>
+      <h2>Basket</h2>
+      <ItemList>
+        {basketItems.length === 0 ? (
+          <EmptyMessage>Your basket is empty</EmptyMessage>
+        ) : (
+          basketItems.map((item, index) => (
+            <ShoppingListItem key={index}>
+              {item.name} - £{item.price}
+            </ShoppingListItem>
+          ))
+        )}
+      </ItemList>
+      <TotalContainer>
+        <TotalLabel>Total:</TotalLabel>
+        <TotalPrice>£{calculateTotalPrice()}</TotalPrice>
+      </TotalContainer>
+      <CheckoutButton>Proceed to Checkout</CheckoutButton>
+    </SidePanel>
   );
 };
 
 export default BasketModal;
 
-const ModalBackground = styled.div`
+const SidePanel = styled.div`
   position: fixed;
   top: 0;
-  right: 0;
-  width: 20%;
+  right: ${({ showModal }) => (showModal ? "0" : "-100%")};
+  width: 300px;
   height: 100%;
-  background-color: #6969a4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ModalContainer = styled.div`
-  background: #eae3a5;
+  background-color: #f9f9f9;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
   padding: 20px;
-  border-radius: 8px;
-  position: relative;
-  max-width: 500px;
-  width: 100%;
+  transition: right 0.3s ease-in-out;
+  z-index: 10;
 `;
 
 const CloseButton = styled.button`
   position: absolute;
   top: 10px;
   right: 10px;
-  color: black;
-  background-color: #a52121;
+  color: #ffffff;
+  background-color: #333;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
 
   &:hover {
-    color: white;
-    background-color: #fd0b0b;
+    background-color: #555;
   }
 `;
 
-const ShoppingList = styled.li`
-    margin-bottom: 10px;
-    font-family: Arial, Helvetica, sans-serif
-`
+const ItemList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 70%;
+  overflow-y: auto;
+`;
+
+const ShoppingListItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+`;
+
+const ItemName = styled.span`
+  font-weight: bold;
+`;
+
+const ItemPrice = styled.span`
+  color: #333;
+`;
+
+const EmptyMessage = styled.li`
+  text-align: center;
+  color: #888;
+`;
+
+const TotalContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+const TotalLabel = styled.span`
+  font-weight: bold;
+`;
+
+const TotalPrice = styled.span`
+  color: #333;
+`;
 
 const CheckoutButton = styled.button`
-    position: absolute;
-    bottom: 10px;
-`
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    background-color: #555;
+  }
+`;

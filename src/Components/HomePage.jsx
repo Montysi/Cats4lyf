@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { BasketContext } from "../Context/BasketContext";
 import { CatInfoContext, CatInfoProvider } from "../Context/CatInfoContext";
 import CatInfoModal from "./CatinfoModal";
+import NavBar from "./NavBar";
 
 const HomePage = ({ cats, errorMsg }) => {
   const { addItemToBasket, toggleModal } = useContext(BasketContext);
@@ -13,13 +14,7 @@ const HomePage = ({ cats, errorMsg }) => {
 
   return (
     <>
-      <NavBar>
-        <img src={Logo} alt="Logo" />
-        <h1>Cats4Lyf</h1>
-        <BasketIcon onClick={toggleModal}>
-          <FontAwesomeIcon icon={faShoppingBasket} size="2x" />
-        </BasketIcon>
-      </NavBar>
+    <NavBar /> 
       <ErrorMessage>{errorMsg && <p>{errorMsg}</p>}</ErrorMessage>
       <CatsInfo>
         {cats.map((cat, index) => {
@@ -42,36 +37,6 @@ const HomePage = ({ cats, errorMsg }) => {
 };
 
 export default HomePage;
-
-const NavBar = styled.nav`
-  width: 100%;
-  height: 70px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  background-color: #555;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  color: #fff;
-
-  img {
-    height: 50px;
-    width: 50px;
-  }
-`;
-
-const BasketIcon = styled.div`
-  cursor: pointer;
-  color: white;
-  padding-right: 50px;
-
-  &:hover {
-    color: black;
-  }
-`;
 
 const ErrorMessage = styled.p`
   color: red;

@@ -2,12 +2,15 @@ import React, { useContext } from "react";
 import { BasketContext } from "../Context/BasketContext";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import NavBar from "./NavBar";
 
 const CheckoutPage = () => {
   const { basketItems, calculateTotalPrice } = useContext(BasketContext);
   const navigate = useNavigate();
 
   return (
+    <>
+    <NavBar />
     <CheckoutContainer>
       <h2>Checkout</h2>
       {basketItems.length === 0 ? (
@@ -27,6 +30,7 @@ const CheckoutPage = () => {
       </TotalContainer>
       <HomeButton onClick={() => navigate("/")}>Back to Store</HomeButton>
     </CheckoutContainer>
+    </>
   );
 };
 

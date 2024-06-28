@@ -10,26 +10,30 @@ const CheckoutPage = () => {
 
   return (
     <>
-    <NavBar />
-    <CheckoutContainer>
-      <h2>Checkout</h2>
-      {basketItems.length === 0 ? (
-        <p>Your basket is empty</p>
-      ) : (
-        <ul>
-          {basketItems.map((item, index) => (
-            <CheckoutItem key={index}>
-              {item.name} - £{item.price}
-            </CheckoutItem>
-          ))}
-        </ul>
-      )}
-      <TotalContainer>
-        <TotalLabel>Total:</TotalLabel>
-        <TotalPrice>£{calculateTotalPrice()}</TotalPrice>
-      </TotalContainer>
-      <HomeButton onClick={() => navigate("/")}>Back to Store</HomeButton>
-    </CheckoutContainer>
+      <NavBar />
+      <CheckoutContainer>
+        <h2>Checkout</h2>
+        {basketItems.length === 0 ? (
+          <p>Your basket is empty</p>
+        ) : (
+          <ul>
+            {basketItems.map((item, index) => (
+              <CheckoutItem key={index}>
+                <ItemDetails>
+                  <ItemName>{item.name}</ItemName>
+                  <ItemPrice>£{item.price}</ItemPrice>                  
+                </ItemDetails>
+                <ItemImage src={item.img} alt={item.name} />
+              </CheckoutItem>
+            ))}
+          </ul>
+        )}
+        <TotalContainer>
+          <TotalLabel>Total:</TotalLabel>
+          <TotalPrice>£{calculateTotalPrice()}</TotalPrice>
+        </TotalContainer>
+        <HomeButton onClick={() => navigate("/")}>Back to Store</HomeButton>
+      </CheckoutContainer>
     </>
   );
 };
@@ -53,7 +57,26 @@ const CheckoutItem = styled.li`
   border-bottom: 1px solid #ddd;
 `;
 
-const TotalContainer = styled.div``;
+const ItemDetails = styled.div`
+  flex: 1;
+`;
+
+const ItemName= styled.h3`
+  margin: 0;
+`;
+
+const ItemPrice = styled.p`
+  margin: 0;
+`;
+
+const ItemImage = styled.img`
+  width: 100px;
+  height: 100px;
+`;
+
+const TotalContainer = styled.div`
+margin-top: 20px
+`;
 
 const TotalLabel = styled.span`
   font-weight: bold;

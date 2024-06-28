@@ -33,7 +33,9 @@ const CatInfoModal = () => {
   }
 
   const handleAddToBasket = () => {
-    addItemToBasket(selectedCat);
+    addItemToBasket({...selectedCat,
+      img: selectedCat.catImage
+    })
   };
 
 

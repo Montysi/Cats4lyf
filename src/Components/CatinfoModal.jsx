@@ -3,6 +3,8 @@ import Modal from "react-modal";
 import { CatInfoContext } from "../Context/CatInfoContext";
 import styled from "styled-components";
 import Logo from "../image/blackcat.png";
+import { BasketContext } from "../Context/BasketContext";
+import BasketModal from "./BasketModal";
 
 const customStyles = {
   content: {
@@ -23,11 +25,17 @@ const customStyles = {
 
 const CatInfoModal = () => {
   const { modalIsOpen, closeModal, selectedCat } = useContext(CatInfoContext);
+  const { addItemToBasket } = useContext(BasketContext);
 
   
   if (!modalIsOpen || !selectedCat) {
     return null;
   }
+
+  const handleAddToBasket = () => {
+    addItemToBasket(selectedCat);
+  };
+
 
   return (
     <Modal
@@ -38,20 +46,15 @@ const CatInfoModal = () => {
       <Header>
         <img src={Logo} alt="Logo" />
         <h1>More Information</h1>
-        <button className="modalButton" onClick={closeModal}>
-          Close
-        </button>
+        <AddToBasketButton onClick={handleAddToBasket}>Add to Basket</AddToBasketButton>
+        <CloseButton onClick={closeModal}>Close</CloseButton>
       </Header>
       <Content>
         <ImgContent>
-          <img
-            src={selectedCat.catImage}
-            alt="Cat"
-          />
+          <img src={selectedCat.catImage} alt="Cat" />
         </ImgContent>
         <TextContent>
-          <h2>{selectedCat.name}</h2>
-          <p>Breed: {selectedCat.breed}</p>
+          <h2>{selectedCat.name}</h2> <p>Breed: {selectedCat.breed}</p>
           <p>Price: ${selectedCat.price}</p>
           <p>Gender: {selectedCat.gender}</p>
           <p>
@@ -60,8 +63,8 @@ const CatInfoModal = () => {
             known for{" "}
             {selectedCat.breed === "Persian"
               ? "a luxurious coat and calm demeanor"
-              : selectedCat.breed === "Maine Coon" 
-              ? "an extroverted and playful temperment" 
+              : selectedCat.breed === "Maine Coon"
+              ? "an extroverted and playful temperment"
               : selectedCat.breed === "Bengal Cat"
               ? "being a very active and athletic cat"
               : selectedCat.breed === "British Shorthair"
@@ -94,25 +97,44 @@ const Header = styled.header`
     font-style: underline;
   }
 
-  button {
-    margin: 5px;
-    padding: 5px 10px;
-    border: none;
-    background-color: #333;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    position: absolute;
-    right: 2px;
-    top: 2px;
-  }
-
   img {
     height: 60px;
     width: 60px;
     position: absolute;
-    left: 10px
+    left: 10px;
+  }
+`;
 
+const AddToBasketButton = styled.button`
+  margin: 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  right: 60px;
+  top: 2px;
+
+  &:hover {
+    background-color: #555;
+  }
+`;
+
+const CloseButton = styled.button`
+  margin: 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  &:hover {
+    background-color: #555;
   }
 `;
 
@@ -134,6 +156,7 @@ const ImgContent = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 2%;
   }
 `;
 
@@ -154,4 +177,6 @@ const TextContent = styled.div`
     margin: 5px 0;
     padding: 15px;
   }
+
+  
 `;

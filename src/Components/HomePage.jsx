@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../image/blackcat.png";
@@ -9,13 +8,8 @@ import { CatInfoContext, CatInfoProvider } from "../Context/CatInfoContext";
 import CatInfoModal from "./CatinfoModal";
 
 const HomePage = ({ cats, errorMsg }) => {
-  const navigate = useNavigate();
   const { addItemToBasket, toggleModal } = useContext(BasketContext);
   const { openModal } = useContext(CatInfoContext);
-
-  const handleNavigate = (index) => {
-    navigate(`cat/${index}`);
-  };
 
   return (
     <>
@@ -30,16 +24,12 @@ const HomePage = ({ cats, errorMsg }) => {
           </BasketIcon>
         </NavBarRight>
       </NavBar>
-      {errorMsg && <p>{errorMsg}</p>}
+      <ErrorMessage>{errorMsg && <p>{errorMsg}</p>}</ErrorMessage>
       <CatsInfo>
         {cats.map((cat, index) => {
           return (
             <CatCard key={index}>
-              <img
-                src={cat.catImage}
-                alt={cat.name}
-                onClick={() => handleNavigate(index)}
-              />
+              <img src={cat.catImage} alt={cat.name} />
               <h3>{cat.name}</h3>
               <p>£{cat.price}</p>
               <button onClick={() => addItemToBasket(cat)}>
@@ -64,7 +54,7 @@ const NavBar = styled.nav`
   top: 0;
   left: 0;
   z-index: 10;
-  background-color: #333;
+  background-color: #555;
   display: flex;
   align-items: center;
   justify-content: space-between;

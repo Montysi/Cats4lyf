@@ -16,54 +16,72 @@ const BasketModal = () => {
   if (!showModal) {
     return null;
   }
-
+  
+  const handleOverlayClick = (event) => {
+    if (event.target === event.currentTarget) {
+      closeModal();
+    }
+  };
+  
   const handleCheckout = () => {
     closeModal();
     history.push("/checkout");
   };
 
   return (
-    <SidePanel showModal={showModal}>
-      <CloseButton onClick={closeModal}>X</CloseButton>
-      <h2>Basket</h2>
-      <ItemList>
-        {basketItems.length === 0 ? (
-          <EmptyMessage>Your basket is empty</EmptyMessage>
-        ) : (
-          basketItems.map((item, index) => (
-            <ShoppingListItem key={index}>
-              {item.name} - £{item.price}
-              <RemoveButton onClick={() => removeItemFromBasket(item)}>
-                Remove
-              </RemoveButton>
-            </ShoppingListItem>
-          ))
-        )}
-      </ItemList>
-      <TotalContainer>
-        <TotalLabel>Total:</TotalLabel>
-        <TotalPrice>£{calculateTotalPrice()}</TotalPrice>
-      </TotalContainer>
-      <CheckoutButton onClick={() => navigate("/checkout")}>
+    <Overlay onClick={handleOverlayClick}>
+      <SidePanel>
+        <CloseButton onClick={closeModal}>X</CloseButton>
+        <h2>Basket</h2>
+        <ItemList>
+          {basketItems.length === 0 ? (
+            <EmptyMessage>Your basket is empty</EmptyMessage>
+          ) : (
+            basketItems.map((item, index) => (
+              <ShoppingListItem key={index}>
+                {item.name} <br /> £{item.price}
+                <RemoveButton onClick={() => removeItemFromBasket(item)}>
+                  Remove
+                </RemoveButton>
+              </ShoppingListItem>
+            ))
+          )}
+        </ItemList>
+        <TotalSection>
+          <TotalContainer>
+            <TotalLabel>Total:</TotalLabel>
+            <TotalPrice>£{calculateTotalPrice()}</TotalPrice>
+          </TotalContainer>
+           <CheckoutButton onClick={() => navigate("/checkout")}>
         Proceed to Checkout
       </CheckoutButton>
-    </SidePanel>
+        </TotalSection>
+      </SidePanel>
+    </Overlay>
   );
 };
 
 export default BasketModal;
 
-const SidePanel = styled.div`
+const Overlay = styled.div`
   position: fixed;
   top: 0;
-  right: ${({ showModal }) => (showModal ? "0" : "-100%")};
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1000;
+`;
+
+const SidePanel = styled.div`
+  position: relative;
   width: 300px;
   height: 100%;
   background-color: #f9f9f9;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
   padding: 20px;
-  transition: right 0.3s ease-in-out;
-  z-index: 10;
 `;
 
 const CloseButton = styled.button`
@@ -78,6 +96,7 @@ const CloseButton = styled.button`
   height: 30px;
   font-size: 16px;
   cursor: pointer;
+  z-index: 1002;
 
   &:hover {
     background-color: #555;
@@ -99,25 +118,28 @@ const ShoppingListItem = styled.li`
   border-bottom: 1px solid #ddd;
 `;
 
-const ItemName = styled.span`
-  font-weight: bold;
-`;
-
-const ItemPrice = styled.span`
-  color: #333;
-`;
-
 const EmptyMessage = styled.li`
   text-align: center;
   color: #888;
 `;
 
+const TotalSection = styled.div`
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  width: 100%;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+`;
+
 const TotalContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
   font-size: 18px;
   font-weight: bold;
+  padding: 0 20px;
 `;
 
 const TotalLabel = styled.span`
@@ -145,6 +167,7 @@ const RemoveButton = styled.button`
 
 const CheckoutButton = styled.button`
   width: 100%;
+  height: 50px;
   padding: 10px;
   margin-top: 20px;
   background-color: #333;
@@ -153,8 +176,16 @@ const CheckoutButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: 900;
 
   &:hover {
     background-color: #555;
   }
+`;
+
+const RemoveButton = styled.button`
+  width: 65px;
+  height: 25px;
+  background-color: #333;
+  color: white;
 `;

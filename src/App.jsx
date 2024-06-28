@@ -28,7 +28,17 @@ const App = () => {
           catID: index,
           catImage: cat.url,
           name: faker.person.fullName(),
-          breed: faker.animal.cat(),
+          breed: faker.helpers.arrayElement([
+            "Persian", 
+            "Maine Coon", 
+            "Bengal Cat",
+            "British Shorthair", 
+            "Siamese",
+            "Abyssinian",
+            "Sphynx",
+            "Ragdoll",
+            "Norweigan Forest Cat"
+          ]),
           price: faker.finance.amount({ min: 150, max: 600 }),
           gender: faker.helpers.arrayElement(["Male", "Female"]),
         };

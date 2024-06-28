@@ -20,6 +20,23 @@ export const BasketProvider = ({ children }) => {
     setShowModal(false);
   };
 
+  const calculateTotalPrice = () => {
+    return basketItems.reduce(
+      (total, item) => total + parseFloat(item.price),
+      0
+    );
+  };
+
+  const removeItemFromBasket = (itemToRemove) => {
+    setBasketItems((prevItems) =>
+      prevItems.filter((item) => item !== itemToRemove)
+    );
+  };
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
   //Gathers all pieces of state and functions into one place
   //allowing us to provide all these values to any component that needs them
   const contextValue = {
@@ -27,6 +44,9 @@ export const BasketProvider = ({ children }) => {
     addItemToBasket,
     showModal,
     closeModal,
+    calculateTotalPrice,
+    removeItemFromBasket,
+    toggleModal,
   };
 
   return (

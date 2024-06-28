@@ -48,7 +48,8 @@ const CatsInfo = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  padding: 100px 20px 20px;
+  padding: 50px 20px 20px;
+  justify-content: center;
 
   img {
     height: 250px;

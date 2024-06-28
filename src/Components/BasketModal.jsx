@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { BasketContext } from "../Context/BasketContext";
+import Logo from "../image/blackcat.png";
 
 const BasketModal = () => {
   const {
@@ -31,8 +32,11 @@ const BasketModal = () => {
   return (
     <Overlay onClick={handleOverlayClick}>
       <SidePanel>
-        <CloseButton onClick={closeModal}>X</CloseButton>
-        <h2>Basket</h2>
+        <Header>
+          <img src={Logo} alt="Logo" />
+          <CloseButton onClick={closeModal}>X</CloseButton>
+          <h2>Basket</h2>
+        </Header>
         <ItemList>
           {basketItems.length === 0 ? (
             <EmptyMessage>Your basket is empty</EmptyMessage>
@@ -84,9 +88,23 @@ const SidePanel = styled.div`
   padding: 20px;
 `;
 
+const Header = styled.header`
+  display: flex;
+  text-align: center;
+  flex-direction: row;
+  padding: 0;
+
+  img {
+    width: 40px;
+    height: 40px;
+    padding-top: 10px;
+    padding-right: 70px;
+  }
+`;
+
 const CloseButton = styled.button`
   position: absolute;
-  top: 10px;
+  top: 33px;
   right: 10px;
   color: #ffffff;
   background-color: #333;

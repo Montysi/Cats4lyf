@@ -183,9 +183,4 @@ const CheckoutButton = styled.button`
   }
 `;
 
-const RemoveButton = styled.button`
-  width: 65px;
-  height: 25px;
-  background-color: #333;
-  color: white;
-`;
+

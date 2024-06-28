@@ -3,6 +3,8 @@ import Modal from "react-modal";
 import { CatInfoContext } from "../Context/CatInfoContext";
 import styled from "styled-components";
 import Logo from "../image/blackcat.png";
+import { BasketContext } from "../Context/BasketContext";
+import BasketModal from "./BasketModal";
 
 const customStyles = {
   content: {
@@ -23,11 +25,17 @@ const customStyles = {
 
 const CatInfoModal = () => {
   const { modalIsOpen, closeModal, selectedCat } = useContext(CatInfoContext);
+  const { addItemToBasket } = useContext(BasketContext);
 
   
   if (!modalIsOpen || !selectedCat) {
     return null;
   }
+
+  const handleAddToBasket = () => {
+    addItemToBasket(selectedCat);
+  };
+
 
   return (
     <Modal
@@ -38,16 +46,12 @@ const CatInfoModal = () => {
       <Header>
         <img src={Logo} alt="Logo" />
         <h1>More Information</h1>
-        <button className="modalButton" onClick={closeModal}>
-          Close
-        </button>
+        <button onClick={handleAddToBasket}>Add to Basket</button>
+        <button onClick={closeModal}>Close</button>
       </Header>
       <Content>
         <ImgContent>
-          <img
-            src={selectedCat.catImage}
-            alt="Cat"
-          />
+          <img src={selectedCat.catImage} alt="Cat" />
         </ImgContent>
         <TextContent>
           <h2>{selectedCat.name}</h2>
@@ -60,8 +64,8 @@ const CatInfoModal = () => {
             known for{" "}
             {selectedCat.breed === "Persian"
               ? "a luxurious coat and calm demeanor"
-              : selectedCat.breed === "Maine Coon" 
-              ? "an extroverted and playful temperment" 
+              : selectedCat.breed === "Maine Coon"
+              ? "an extroverted and playful temperment"
               : selectedCat.breed === "Bengal Cat"
               ? "being a very active and athletic cat"
               : selectedCat.breed === "British Shorthair"

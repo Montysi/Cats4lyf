@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 import Logo from "../image/blackcat.png";
 import styled from "styled-components";
-import { BasketContext } from "../Context/BasketContext";
-import { CatInfoContext } from "../Context/CatInfoContext";
+import { BasketContext } from "../Context/BasketContext"
+import { CatInfoContext, CatInfoProvider } from "../Context/CatInfoContext";
 import CatInfoModal from "./CatinfoModal";
 
 const HomePage = ({ cats, errorMsg }) => {

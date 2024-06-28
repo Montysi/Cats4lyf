@@ -6,7 +6,8 @@ import "./App.css";
 import BasketProvider from "./Context/BasketContext";
 import BasketModal from "./Components/BasketModal";
 import Modal from "react-modal";
-import { CatInfoProvider } from "./Context/CatInfoContext";
+import { CatInfoProvider } from './Context/CatInfoContext';
+
 
 const App = () => {
   const [cats, setCats] = useState([]);
@@ -28,7 +29,7 @@ const App = () => {
           name: faker.person.fullName(),
           breed: faker.animal.cat(),
           price: faker.finance.amount({ min: 150, max: 600 }),
-          gender: faker.person.gender(),
+          gender: faker.helpers.arrayElement(["Male", "Female"]),
         };
       });
       console.log(catData);
@@ -62,18 +63,4 @@ const App = () => {
 
 export default App;
 
-const customStyles = {
-  content: {
-    width: "50%",
-    height: "50%",
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-  overlay: {
-    backgroundColor: "rgba(0, 0, 0, 0.75)",
-  },
-};
+

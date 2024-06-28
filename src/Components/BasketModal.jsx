@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import {useHistory} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { BasketContext } from "../Context/BasketContext";
 
 const BasketModal = () => {
@@ -11,7 +11,7 @@ const BasketModal = () => {
     calculateTotalPrice,
     removeItemFromBasket,
   } = useContext(BasketContext);
-  const history = useHistory()
+  const navigate= useNavigate()
 
   if (!showModal) {
     return null;
@@ -44,7 +44,7 @@ const BasketModal = () => {
         <TotalLabel>Total:</TotalLabel>
         <TotalPrice>£{calculateTotalPrice()}</TotalPrice>
       </TotalContainer>
-      <CheckoutButton onClick={handleCheckout}>
+      <CheckoutButton onClick={() => navigate("/checkout")}>
         Proceed to Checkout
       </CheckoutButton>
     </SidePanel>

@@ -53,9 +53,9 @@ const App = () => {
             <Route path="/" element={<HomePage cats={cats} errorMsg={errorMsg} />}/>
             <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
+          <BasketModal />
         </CatInfoProvider>
       </Router>
-      <BasketModal />
     </BasketProvider>
   );
 };

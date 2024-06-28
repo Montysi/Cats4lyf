@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {BasketContext} from "..Context/BasketContext";
+import {BasketContext} from "../Context/BasketContext";
 import styled from "styled-components";
 
 const CheckoutPage = () => {
@@ -14,7 +14,7 @@ const CheckoutPage = () => {
         <ul>
           {basketItems.map((item, index) => (
             <li key={index}>
-              {basketItems.name} - £{item.price}
+              {items.name} - £{item.price}
             </li>
           ))}
         </ul>

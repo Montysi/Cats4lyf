@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Modal from "react-modal";
 import { CatInfoContext } from "../Context/CatInfoContext";
 import styled from "styled-components";
-import { faker } from "@faker-js/faker";
+import Logo from "../image/blackcat.png";
 
 const customStyles = {
   content: {
@@ -36,6 +36,7 @@ const CatInfoModal = () => {
       style={customStyles}
     >
       <Header>
+        <img src={Logo} alt="Logo" />
         <h1>More Information</h1>
         <button className="modalButton" onClick={closeModal}>
           Close
@@ -46,7 +47,6 @@ const CatInfoModal = () => {
           <img
             src={selectedCat.catImage}
             alt="Cat"
-            style={{ maxWidth: "100px" }}
           />
         </ImgContent>
         <TextContent>
@@ -60,6 +60,12 @@ const CatInfoModal = () => {
             known for{" "}
             {selectedCat.breed === "Persian"
               ? "a luxurious coat and calm demeanor"
+              : selectedCat.breed === "Maine Coon" 
+              ? "an extroverted and playful temperment" 
+              : selectedCat.breed === "Bengal Cat"
+              ? "being a very active and athletic cat"
+              : selectedCat.breed === "British Shorthair"
+              ? "being easy going and placid"
               : selectedCat.breed === "Siamese"
               ? "an affectionate nature and vocal communication"
               : "a playful and friendly disposition"}
@@ -100,6 +106,14 @@ const Header = styled.header`
     right: 2px;
     top: 2px;
   }
+
+  img {
+    height: 60px;
+    width: 60px;
+    position: absolute;
+    left: 10px
+
+  }
 `;
 
 const Content = styled.div`
@@ -110,32 +124,34 @@ const Content = styled.div`
 `;
 
 const ImgContent = styled.div`
-flex: 1;
-  width: 50%;
+  flex: 1;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid red;
   overflow: hidden;
   img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;
 
 const TextContent = styled.div`
-  flex: 1; 
+  flex: 1;
   margin-left: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center; 
+  justify-content: center;
+  align-items: center;
 
   h2 {
     margin-bottom: 10px;
+    padding: 15px;
   }
 
   p {
     margin: 5px 0;
+    padding: 15px;
   }
 `;

@@ -1,9 +1,11 @@
 import React, {useContext} from "react";
 import {BasketContext} from "../Context/BasketContext";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const CheckoutPage = () => {
   const {basketItems} = useContext(BasketContext);
+  const navigate = useNavigate();
 
   return (
     <CheckoutContainer>
@@ -14,11 +16,12 @@ const CheckoutPage = () => {
         <ul>
           {basketItems.map((item, index) => (
             <li key={index}>
-              {items.name} - £{item.price}
+              {item.name} - £{item.price}
             </li>
           ))}
         </ul>
       )}
+      <HomeButton onClick = {() => navigate('/')}>Back to Store</HomeButton>
     </CheckoutContainer>
   )
 };
@@ -32,3 +35,7 @@ const CheckoutContainer = styled.div`
 const Checkoutitem = styled.li`
   
 `;
+
+const HomeButton = styled.button`
+  
+`

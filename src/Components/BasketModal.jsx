@@ -1,14 +1,26 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import {useNavigate} from "react-router-dom";
 import { BasketContext } from "../Context/BasketContext";
 
 const BasketModal = () => {
-  const { showModal, closeModal, basketItems, calculateTotalPrice, removeItemFromBasket } =
-    useContext(BasketContext);
+  const {
+    showModal,
+    closeModal,
+    basketItems,
+    calculateTotalPrice,
+    removeItemFromBasket,
+  } = useContext(BasketContext);
+  const navigate= useNavigate()
 
   if (!showModal) {
     return null;
   }
+
+  const handleCheckout = () => {
+    closeModal();
+    history.push("/checkout");
+  };
 
   return (
     <SidePanel showModal={showModal}>
@@ -32,7 +44,9 @@ const BasketModal = () => {
         <TotalLabel>Total:</TotalLabel>
         <TotalPrice>£{calculateTotalPrice()}</TotalPrice>
       </TotalContainer>
-      <CheckoutButton>Proceed to Checkout</CheckoutButton>
+      <CheckoutButton onClick={() => navigate("/checkout")}>
+        Proceed to Checkout
+      </CheckoutButton>
     </SidePanel>
   );
 };
@@ -115,6 +129,18 @@ const TotalPrice = styled.span`
 `;
 
 const RemoveButton = styled.button`
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    background-color: #555;
+  }
 `;
 
 const CheckoutButton = styled.button`

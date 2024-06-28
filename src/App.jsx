@@ -1,10 +1,11 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes,} from "react-router-dom";
 import { useState, useEffect } from "react";
 import HomePage from "./Components/HomePage";
 import { faker } from "@faker-js/faker";
 import "./App.css";
 import BasketProvider from "./Context/BasketContext";
 import BasketModal from "./Components/BasketModal";
+import CheckoutPage from "./Components/CheckoutPage"
 import Modal from "react-modal";
 import { CatInfoProvider } from './Context/CatInfoContext';
 
@@ -59,14 +60,12 @@ const App = () => {
       <Router>
         <CatInfoProvider>
           <Routes>
-            <Route
-              path="/"
-              element={<HomePage cats={cats} errorMsg={errorMsg} />}
-            />
+            <Route path="/" element={<HomePage cats={cats} errorMsg={errorMsg} />}/>
+            <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
+          <BasketModal />
         </CatInfoProvider>
       </Router>
-      <BasketModal />
     </BasketProvider>
   );
 };

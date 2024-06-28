@@ -45,7 +45,7 @@ const HomePage = ({ cats, errorMsg }) => {
               <button onClick={() => addItemToBasket(cat)}>
                 Add to Basket
               </button>
-              <button onClick={() => showModal(cat)}>More Info</button>
+              <button onClick={() => openModal(cat)}>More Info</button>
             </CatCard>
           );
         })}

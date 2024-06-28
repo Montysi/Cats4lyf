@@ -14,15 +14,11 @@ const HomePage = ({ cats, errorMsg }) => {
   return (
     <>
       <NavBar>
-        <NavBarLeft>
-          <img src={Logo} alt="Logo" />
-          <h1>Cats4Lyf</h1>
-        </NavBarLeft>
-        <NavBarRight>
-          <BasketIcon onClick={toggleModal}>
-            <FontAwesomeIcon icon={faShoppingBasket} size="2x" />
-          </BasketIcon>
-        </NavBarRight>
+        <img src={Logo} alt="Logo" />
+        <h1>Cats4Lyf</h1>
+        <BasketIcon onClick={toggleModal}>
+          <FontAwesomeIcon icon={faShoppingBasket} size="2x" />
+        </BasketIcon>
       </NavBar>
       <ErrorMessage>{errorMsg && <p>{errorMsg}</p>}</ErrorMessage>
       <CatsInfo>
@@ -60,25 +56,11 @@ const NavBar = styled.nav`
   justify-content: space-between;
   padding: 0 20px;
   color: #fff;
-`;
-
-const NavBarLeft = styled.div`
-  display: flex;
-  align-items: center;
 
   img {
     height: 50px;
     width: 50px;
   }
-
-  h1 {
-    margin-left: 10px;
-  }
-`;
-
-const NavBarRight = styled.div`
-  display: flex;
-  align-items: center;
 `;
 
 const BasketIcon = styled.div`
@@ -101,7 +83,8 @@ const CatsInfo = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  padding: 100px 20px 20px;
+  padding: 50px 20px 20px;
+  justify-content: center;
 
   img {
     height: 250px;

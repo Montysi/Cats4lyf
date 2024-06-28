@@ -1,10 +1,10 @@
-import React, {useContext} from "react";
-import {BasketContext} from "../Context/BasketContext";
+import React, { useContext } from "react";
+import { BasketContext } from "../Context/BasketContext";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const CheckoutPage = () => {
-  const {basketItems} = useContext(BasketContext);
+  const { basketItems, calculateTotalPrice } = useContext(BasketContext);
   const navigate = useNavigate();
 
   return (
@@ -15,27 +15,31 @@ const CheckoutPage = () => {
       ) : (
         <ul>
           {basketItems.map((item, index) => (
-            <li key={index}>
+            <CheckoutItem key={index}>
               {item.name} - £{item.price}
-            </li>
+            </CheckoutItem>
           ))}
         </ul>
       )}
-      <HomeButton onClick = {() => navigate('/')}>Back to Store</HomeButton>
+      <TotalContainer>
+        <TotalLabel>Total:</TotalLabel>
+        <TotalPrice>£{calculateTotalPrice()}</TotalPrice>
+      </TotalContainer>
+      <HomeButton onClick={() => navigate("/")}>Back to Store</HomeButton>
     </CheckoutContainer>
-  )
+  );
 };
 
 export default CheckoutPage;
 
-const CheckoutContainer = styled.div`
-  
-`;
+const CheckoutContainer = styled.div``;
 
-const Checkoutitem = styled.li`
-  
-`;
+const CheckoutItem = styled.li``;
 
-const HomeButton = styled.button`
-  
-`
+const TotalContainer = styled.div``;
+
+const TotalLabel = styled.span``;
+
+const TotalPrice = styled.span``;
+
+const HomeButton = styled.button``;

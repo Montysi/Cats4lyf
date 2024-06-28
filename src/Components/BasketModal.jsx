@@ -1,14 +1,26 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import {useHistory} from "react-router-dom";
 import { BasketContext } from "../Context/BasketContext";
 
 const BasketModal = () => {
-  const { showModal, closeModal, basketItems, calculateTotalPrice, removeItemFromBasket } =
-    useContext(BasketContext);
+  const {
+    showModal,
+    closeModal,
+    basketItems,
+    calculateTotalPrice,
+    removeItemFromBasket,
+  } = useContext(BasketContext);
+  const history = useHistory()
 
   if (!showModal) {
     return null;
   }
+
+  const handleCheckout = () => {
+    closeModal();
+    history.push("/checkout");
+  };
 
   return (
     <SidePanel showModal={showModal}>
@@ -32,7 +44,9 @@ const BasketModal = () => {
         <TotalLabel>Total:</TotalLabel>
         <TotalPrice>£{calculateTotalPrice()}</TotalPrice>
       </TotalContainer>
-      <CheckoutButton>Proceed to Checkout</CheckoutButton>
+      <CheckoutButton onClick={handleCheckout}>
+        Proceed to Checkout
+      </CheckoutButton>
     </SidePanel>
   );
 };
@@ -114,8 +128,7 @@ const TotalPrice = styled.span`
   color: #333;
 `;
 
-const RemoveButton = styled.button`
-`;
+const RemoveButton = styled.button``;
 
 const CheckoutButton = styled.button`
   width: 100%;

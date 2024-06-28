@@ -13,20 +13,15 @@ const NavBar = () => {
 
   const handleNavigate = () => navigate("/");
 
-
-return (
-  <StyledNavBar>
-    <NavBarLeft>
+  return (
+    <StyledNavBar>
       <img src={Logo} alt="Logo" />
       <h1>Cats4Lyf</h1>
-    </NavBarLeft>
-    <NavBarRight>
       <BasketIcon onClick={toggleModal}>
         <FontAwesomeIcon icon={faShoppingBasket} size="2x" />
       </BasketIcon>
-    </NavBarRight>
-  </StyledNavBar>
-);
+    </StyledNavBar>
+  );
 };
 
 export default NavBar;
@@ -44,33 +39,19 @@ const StyledNavBar = styled.nav`
   justify-content: space-between;
   padding: 0 20px;
   color: #fff;
-`;
-
-const NavBarLeft = styled.div`
-  display: flex;
-  align-items: center;
 
   img {
     height: 50px;
     width: 50px;
   }
-
-  h1 {
-    margin-left: 10px;
-  }
-`;
-
-const NavBarRight = styled.div`
-  display: flex;
-  align-items: center;
 `;
 
 const BasketIcon = styled.div`
   cursor: pointer;
-  color: white;
+  color: black;
   padding-right: 50px;
 
   &:hover {
-    color: black;
+    color: white;
   }
 `;
